@@ -130,7 +130,7 @@ def build_model(data):
 # Load model and tokenizers
 def load_model_and_tokenizers():
     try:
-        # Load saved model
+        # Load saved model)
         model = tf.keras.models.load_model('fake_news_model.h5')
         
         # Load tokenizers
@@ -143,7 +143,7 @@ def load_model_and_tokenizers():
             
         return model, title_tokenizer, author_tokenizer, text_tokenizer
     except:
-        # If model doesn't exist, train a new one
+        print("Model training required. Training a new model...")
         data = load_data()
         return build_model(data)
 
@@ -169,10 +169,8 @@ def predict_fake_news(title, author, text, model, title_tokenizer, author_tokeni
     
     return float(prediction)
 
-# Load model and tokenizers on startup
 model, title_tokenizer, author_tokenizer, text_tokenizer = load_model_and_tokenizers()
 
-# API endpoint
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'Server is running!'})
