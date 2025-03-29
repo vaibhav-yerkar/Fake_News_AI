@@ -57,13 +57,7 @@ def preprocess_text(text):
 # Load and preprocess data
 def load_data():
     # This would normally load from a file, but we're using the sample data from the prompt
-    data = pd.DataFrame({
-        'id': [0],
-        'title': ["House Dem Aide: We Didn't Even See Comey's Letter Until Jason Chaffetz Tweeted It"],
-        'author': ["Darrell Lucus"],
-        'text': ["House Dem Aide: We Didn't Even See Comey's Letter Until Jason Chaffetz Tweeted It By Darrell Lucus on October 30, 2016 Subscribe Jason Chaffetz on the stump in American Fork, Utah ( image courtesy Michael Jolley, available under a Creative Commons-BY license) \nWith apologies to Keith Olbermann, there is no doubt who the Worst Person in The World is this week–FBI Director James Comey. But according to a House Democratic aide, it looks like we also know who the second-worst person is as well. It turns out that when Comey sent his now-infamous letter announcing that the FBI was looking into emails that may be related to Hillary Clinton's email server, the ranking Democrats on the relevant committees didn't hear about it from Comey. They found out via a tweet from one of the Republican committee chairmen. \nAs we now know, Comey notified the Republican chairmen and Democratic ranking members of the House Intelligence, Judiciary, and Oversight committees that his agency was reviewing emails it had recently discovered in order to see if they contained classified information. Not long after this letter went out, Oversight Committee Chairman Jason Chaffetz set the political world ablaze with this tweet. FBI Dir just informed me, \"\"The FBI has learned of the existence of emails that appear to be pertinent to the investigation.\"\" Case reopened \n— Jason Chaffetz (@jasoninthehouse) October 28, 2016"],
-        'label': [1]  # Assuming 1 = fake news
-    })
+    data = pd.read_csv('./train.csv')
     
     # Preprocess title, author, and text columns
     data['title_proc'] = data['title'].apply(preprocess_text)
