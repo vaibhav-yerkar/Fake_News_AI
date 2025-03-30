@@ -12,6 +12,7 @@ import os
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from flask_cors import CORS, cross_origin
 
 # Disable GPU usage to prevent CUDA errors
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -27,6 +28,8 @@ for gpu in gpus:
 # Initialize Flask app with correct port
 port = int(os.environ.get("PORT", 8080))
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Download NLTK resources - commented out to save memory
 nltk.download('stopwords', quiet=True)
@@ -187,12 +190,14 @@ def predict_fake_news(title, author, text):
     return float(prediction)
 
 # Health check endpoint
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET'], endpoint='health_check')
+@cross_origin()
 def health_check():
     return jsonify({'status': 'ok', 'message': 'Fake News Classifier API is running!'})
 
 # API endpoint
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'], endpoint='predict')
+@cross_origin()
 def predict():
     try:
         data = request.json
