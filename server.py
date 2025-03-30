@@ -34,11 +34,11 @@ stop_words = set(stopwords.words('english'))
 stemmer = PorterStemmer()
 
 # Constants - reduced for memory efficiency
-MAX_FEATURES = 5000  # Reduced from 10000
-MAX_TITLE_LENGTH = 30  # Reduced from 50
-MAX_AUTHOR_LENGTH = 15  # Reduced from 20
-MAX_TEXT_LENGTH = 300  # Reduced from 500
-EMBEDDING_DIM = 50  # Reduced from 100
+MAX_FEATURES = 10000  # Reduced from 10000
+MAX_TITLE_LENGTH = 50  # Reduced from 50
+MAX_AUTHOR_LENGTH = 20  # Reduced from 20
+MAX_TEXT_LENGTH = 500  # Reduced from 500
+EMBEDDING_DIM = 100 # Reduced from 100
 
 # Text preprocessing function
 def preprocess_text(text):
@@ -225,5 +225,4 @@ print("Model loaded successfully!")
 if __name__ == '__main__':
     # Run the Flask app
     app.run(debug=False, host='0.0.0.0', port=port)
-
 
